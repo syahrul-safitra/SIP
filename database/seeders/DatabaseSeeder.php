@@ -17,5 +17,48 @@ class DatabaseSeeder extends Seeder
             'email' => 'adminposyandu@gmail.com',
             'password' => 'adminposyandu123',
         ]);
+
+        \App\Models\Ibu::create([
+            'nik' => '10101010',
+            'nama' => 'Ayu',
+            'suami' => 'King',
+            'tempat_lahir' => 'Muaro Jambi',
+            'tanggal_lahir' => '2020-10-10',
+            'alamat' => 'Bungo',
+            'no_hp' => '0100101',
+        ]);
+
+        \App\Models\Ibu::create([
+            'nik' => '20202020',
+            'nama' => 'Devi',
+            'suami' => 'King',
+            'tempat_lahir' => 'Muaro Jambi',
+            'tanggal_lahir' => '2020-10-10',
+            'alamat' => 'Bungo',
+            'no_hp' => '0100101',
+        ]);
+
+        \App\Models\Ibu::create([
+            'nik' => '3030303030',
+            'nama' => 'Eli',
+            'suami' => 'King',
+            'tempat_lahir' => 'Muaro Jambi',
+            'tanggal_lahir' => '2020-10-10',
+            'alamat' => 'Bungo',
+            'no_hp' => '0100101',
+        ]);
+
+        \App\Models\Anak::create([
+            'kode' => '1010',
+            'nama' => 'Kaido',
+            'tempat_lahir' => 'Muaro Jambi',
+            'tanggal_lahir' => '2020-10-10',
+            'jenis_kelamin' => 'laki-laki',
+            'berat_lahir' => '1,5',
+            'tinggi_lahir' => '50',
+            'proses_melahirkan' => 'normal',
+            'alamat' => 'Jl. Muaro',
+            'ibu_id' => '1'
+        ]);
     }
 }

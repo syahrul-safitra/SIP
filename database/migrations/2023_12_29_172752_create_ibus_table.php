@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('ibus', function (Blueprint $table) {
             $table->id();
+            $table->string('nik')->unique();
+            $table->string('nama');
+            $table->string('suami');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->string('alamat');
+            $table->string('no_hp');
             $table->timestamps();
         });
     }

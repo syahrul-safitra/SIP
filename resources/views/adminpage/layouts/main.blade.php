@@ -9,6 +9,7 @@
     <title>RuangAdmin - Dashboard</title>
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/ruang-admin.min.css') }}" rel="stylesheet">
 </head>
 
@@ -277,6 +278,9 @@
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/js/ruang-admin.min.js') }}"></script>
+    <script src="{{ asset('admin/js/my-script.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('admin/vendor/select2/dist/js/select2.min.js') }}"></script>
 </body>
 
 </html>

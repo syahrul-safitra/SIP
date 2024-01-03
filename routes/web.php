@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnakController;
+use App\Http\Controllers\IbuController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,9 @@ Route::get('/', function () {
 Route::get('dashboardAdmin', function () {
     return view('adminpage.index');
 })->middleware('auth');
+
+Route::resource('dashboard/ibu', IbuController::class)->middleware('auth');
+Route::resource('dashboard/anak', AnakController::class)->middleware('auth');
 
 Route::get('login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);
