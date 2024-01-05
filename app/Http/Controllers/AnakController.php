@@ -14,7 +14,7 @@ class AnakController extends Controller
     public function index()
     {
         return view('adminpage.dashboardanak.index', [
-            'anaks' => Anak::all()
+            'anaks' => Anak::with('ibu')->get()
         ]);
     }
 
@@ -23,8 +23,13 @@ class AnakController extends Controller
      */
     public function create()
     {
+
+        $melahirkan = ['normal', 'sesar'];
+        $jenis_kelamin = ['laki-laki', 'perempuan'];
         return view('adminpage.dashboardanak.create', [
-            'ibus' => Ibu::all()
+            'ibus' => Ibu::all(),
+            'melahirkan' => $melahirkan,
+            'jenis_kelamin' => $jenis_kelamin
         ]);
     }
 
@@ -33,7 +38,23 @@ class AnakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'kode' => 'required|min:4|unique:anaks',
+            'nama' => 'required|max:255',
+            'tempat_lahir' => 'required|max:255',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'berat_lahir' => 'required',
+            'tinggi_lahir' => 'required|numeric',
+            'proses_melahirkan' => 'required',
+            'alamat' => 'required|max:255',
+            'ibu_id' => 'required'
+        ]);
+
+        Anak::create($validated);
+
+        return redirect('dashboard/anak')->with('success', 'Data anak berhasil ditambah!');
     }
 
     /**
@@ -49,7 +70,15 @@ class AnakController extends Controller
      */
     public function edit(Anak $anak)
     {
-        //
+
+        $melahirkan = ['normal', 'sesar'];
+        $jenis_kelamin = ['laki-laki', 'perempuan'];
+        return view('adminpage.dashboardanak.edit', [
+            'anak' => $anak,
+            'ibus' => Ibu::all(),
+            'melahirkan' => $melahirkan,
+            'jenis_kelamin' => $jenis_kelamin
+        ]);
     }
 
     /**
@@ -57,7 +86,29 @@ class AnakController extends Controller
      */
     public function update(Request $request, Anak $anak)
     {
-        //
+        $rules = [
+            'nama' => 'required|max:255',
+            'tempat_lahir' => 'required|max:255',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'berat_lahir' => 'required',
+            'tinggi_lahir' => 'required|numeric',
+            'proses_melahirkan' => 'required',
+            'alamat' => 'required|max:255',
+            'ibu_id' => 'required'
+        ];
+
+        // cek apakah kode dirubah : 
+        if ($request->kode != $anak->kode) {
+            $rules['kode'] = 'required|min:4|unique:anaks';
+        }
+
+        $validated = $request->validate($rules);
+
+        Anak::where('id', $anak->id)
+            ->update($validated);
+
+        return redirect('dashboard/anak')->with('success', 'Data anak berhasil dirubah!');
     }
 
     /**
@@ -65,6 +116,8 @@ class AnakController extends Controller
      */
     public function destroy(Anak $anak)
     {
-        //
+        Anak::destroy($anak->id);
+
+        return redirect('dashboard/anak')->with('success', 'Data anak berhasil dihapus!');
     }
 }

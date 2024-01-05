@@ -18,6 +18,12 @@ class Anak extends Model
         'berat_lahir',
         'tinggi_lahir',
         'proses_melahirkan',
-        'alamat'
+        'alamat',
+        'ibu_id'
     ];
+
+    public function ibu()
+    {
+        return $this->belongsTo(Ibu::class);
+    }
 }

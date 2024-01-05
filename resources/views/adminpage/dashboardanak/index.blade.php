@@ -36,6 +36,7 @@
                         <tr>
                             <th>Kode</th>
                             <th>Nama</th>
+                            <th>Nama Ortu</th>
                             <th>Tempat Lhr</th>
                             <th>Tanggal Lhr</th>
                             <th>Jenis Kelamin</th>
@@ -52,6 +53,7 @@
                             <tr>
                                 <td>{{ $anak->kode }}</td>
                                 <td>{{ $anak->nama }}</td>
+                                <td>{{ $anak->ibu->nama }}</td>
                                 <td>{{ $anak->tempat_lahir }}</td>
                                 <td>{{ $anak->tanggal_lahir }}</td>
                                 <td>{{ $anak->jenis_kelamin }}</td>
@@ -61,16 +63,17 @@
                                 <td>{{ $anak->alamat }}</td>
                                 <td>
                                     <div class="d-flex gap-4">
-                                        <a href="{{ url('dashboard/ibu/' . $anak->id . '/edit') }}" class="btn btn-warning"
+                                        <a href="{{ url('dashboard/anak/' . $anak->id . '/edit') }}"
+                                            class="btn btn-warning"
                                             style="padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px;
                                        margin-right: 5px"><i
                                                 class="far fa-edit"></i></a>
 
-                                        <form action="{{ url('dashboard/ibu/' . $anak->id) }}" method="POST">
+                                        <form action="{{ url('dashboard/anak/' . $anak->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn btn-danger"
-                                                onclick=" return confirm('Data ibu akan dihapus')"
+                                                onclick=" return confirm('Data anak akan dihapus')"
                                                 style="padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px"><i
                                                     class="far fa-trash-alt"></i></button>
                                         </form>

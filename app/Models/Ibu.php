@@ -18,4 +18,9 @@ class Ibu extends Model
         'alamat',
         'no_hp'
     ];
+
+    public function anak()
+    {
+        return $this->hasMany(Anak::class);
+    }
 }

@@ -249,7 +249,7 @@
                         <span>copyright &copy;
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> - developed by
+                            </script> - Theme developed by
                             <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
                         </span>
                     </div>
@@ -262,6 +262,17 @@
                                 document.write(new Date().getFullYear());
                             </script> - distributed by
                             <b><a href="https://themewagon.com/" target="_blank">themewagon</a></b>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="container my-auto py-1">
+                    <div class="copyright text-center my-auto">
+                        <span>copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> - System developed by
+                            <b><a href="https://github.com/syahrul-safitra" target="_blank">Zencode</a></b>
                         </span>
                     </div>
                 </div>
