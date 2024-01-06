@@ -52,6 +52,10 @@ class AnakController extends Controller
             'ibu_id' => 'required'
         ]);
 
+        $ibu = Ibu::where('id', $validated['ibu_id'])->first();
+
+        $validated['nama_ibu'] = $ibu->nama;
+
         Anak::create($validated);
 
         return redirect('dashboard/anak')->with('success', 'Data anak berhasil ditambah!');

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('jenis_imunisasi', ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19']);
             $table->string('kode_anak');
-            $table->text('catatan');
+            $table->text('catatan')->nullable();
+            $table->string('nama_anak');
+            $table->date('tanggal');
             $table->timestamps();
 
             $table->foreign('kode_anak')

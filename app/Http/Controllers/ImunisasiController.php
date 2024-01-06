@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Imunisasi;
+use App\Models\Anak;
 use Illuminate\Http\Request;
 
 class ImunisasiController extends Controller
@@ -12,7 +13,9 @@ class ImunisasiController extends Controller
      */
     public function index()
     {
-        //
+        return view('adminpage.dashboardimunisasi.index', [
+            'imunisasis' => Imunisasi::all()
+        ]);
     }
 
     /**
@@ -20,7 +23,13 @@ class ImunisasiController extends Controller
      */
     public function create()
     {
-        //
+
+        $jenis_imunisasis = ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19'];
+
+        return view('adminpage.dashboardimunisasi.create', [
+            'anaks' => Anak::all(),
+            'jenis_imunisasis' => $jenis_imunisasis
+        ]);
     }
 
     /**
@@ -28,7 +37,21 @@ class ImunisasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'jenis_imunisasi' => 'required',
+            'catatan' => 'max:1000',
+            'kode_anak' => 'required',
+            'tanggal' => 'required'
+        ]);
+
+        $getDataAnak = Anak::where('kode', $validated['kode_anak'])->first();
+
+        $validated['nama_anak'] = $getDataAnak->nama;
+
+        Imunisasi::create($validated);
+
+        return redirect('dashboard/imunisasi')->with('success', 'Data imunisasi berhasil ditambah!');
     }
 
     /**
@@ -36,7 +59,9 @@ class ImunisasiController extends Controller
      */
     public function show(Imunisasi $imunisasi)
     {
-        //
+        return view('adminpage.dashboardimunisasi.show', [
+            'imunisasi' => $imunisasi
+        ]);
     }
 
     /**
@@ -44,7 +69,14 @@ class ImunisasiController extends Controller
      */
     public function edit(Imunisasi $imunisasi)
     {
-        //
+
+        $jenis_imunisasis = ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19'];
+
+        return view('adminpage.dashboardimunisasi.edit', [
+            'imunisasi' => $imunisasi,
+            'anaks' => Anak::all(),
+            'jenis_imunisasis' => $jenis_imunisasis
+        ]);
     }
 
     /**
@@ -52,7 +84,18 @@ class ImunisasiController extends Controller
      */
     public function update(Request $request, Imunisasi $imunisasi)
     {
-        //
+
+        $validated = $request->validate([
+            'jenis_imunisasi' => 'required',
+            'catatan' => 'max:1000',
+            'kode_anak' => 'required',
+            'tanggal' => 'required'
+        ]);
+
+        Imunisasi::where('id', $imunisasi->id)
+            ->update($validated);
+
+        return redirect('dashboard/imunisasi')->with('success', 'Data imunisasi berhasil dirubah!');
     }
 
     /**
@@ -60,6 +103,8 @@ class ImunisasiController extends Controller
      */
     public function destroy(Imunisasi $imunisasi)
     {
-        //
+        Imunisasi::destroy($imunisasi->id);
+
+        return redirect('dashboard/imunisasi')->with('success', 'Data imunisasi berhasil dihapus!');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnakController;
 use App\Http\Controllers\IbuController;
+use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('dashboardAdmin', function () {
 
 Route::resource('dashboard/ibu', IbuController::class)->middleware('auth');
 Route::resource('dashboard/anak', AnakController::class)->middleware('auth');
+Route::resource('dashboard/imunisasi', ImunisasiController::class)->middleware('auth');
 
 Route::get('login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('login', [LoginController::class, 'authenticate']);

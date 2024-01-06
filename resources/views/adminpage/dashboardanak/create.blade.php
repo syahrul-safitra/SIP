@@ -65,7 +65,7 @@
 
                                 <div class="form-group">
                                     <label for="ibu">NIK Ibu</label>
-                                    <select class="form-control select-ibu @error('ibu_id') is-invalid @enderror"
+                                    <select class="form-control select-anak @error('ibu_id') is-invalid @enderror"
                                         id="ibu" name="ibu_id">
                                         @if (@old('ibu_id'))
                                             @foreach ($ibus as $ibu)
@@ -91,10 +91,8 @@
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
                                     <label for="proses_melahirkan">Proses Melahirkan</label>
-
                                     <select class="form-control @error('proses_melahirkan') is-invalid @enderror"
                                         name="proses_melahirkan" id="proses_melahirkan">
                                         @if (@old('proses_melahirkan'))

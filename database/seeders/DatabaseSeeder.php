@@ -58,7 +58,16 @@ class DatabaseSeeder extends Seeder
             'tinggi_lahir' => '50',
             'proses_melahirkan' => 'normal',
             'alamat' => 'Jl. Muaro',
+            'nama_ibu' => 'Ayu',
             'ibu_id' => '1'
+        ]);
+
+        \App\Models\Imunisasi::create([
+            'jenis_imunisasi' => 'Hepatitis B',
+            'kode_anak' => '1010',
+            'tanggal' => '2020-10-10',
+            'catatan' => 'normal',
+            'nama_anak' => 'Kaido'
         ]);
     }
 }

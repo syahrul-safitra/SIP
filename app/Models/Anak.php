@@ -19,7 +19,8 @@ class Anak extends Model
         'tinggi_lahir',
         'proses_melahirkan',
         'alamat',
-        'ibu_id'
+        'nama_ibu',
+        'ibu_id',
     ];
 
     public function ibu()

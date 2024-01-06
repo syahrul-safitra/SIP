@@ -20,5 +20,9 @@
         <a class="nav-link" href="{{ url('dashboard/anak') }}">
             <i class="fas fa-solid fa-child"></i>
             <span>Data Anak</span></a>
+
+        <a class="nav-link" href="{{ url('dashboard/imunisasi') }}">
+            <i class="fas fa-syringe"></i>
+            <span>Data Imunisasi</span></a>
     </li>
 </ul>

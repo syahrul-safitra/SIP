@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('tinggi_lahir');
             $table->enum('proses_melahirkan', ['normal', 'sesar']);
             $table->string('alamat');
+            $table->string('nama_ibu');
             $table->timestamps();
 
             $table->foreignId('ibu_id')
