@@ -24,5 +24,13 @@
         <a class="nav-link" href="{{ url('dashboard/imunisasi') }}">
             <i class="fas fa-syringe"></i>
             <span>Data Imunisasi</span></a>
+
+        <a class="nav-link" href="{{ url('dashboard/periksaibuhamil') }}">
+            <i class="fas fa-heartbeat"></i>
+            <span>Data Periksa Ibu Hamil</span></a>
+
+        <a class="nav-link" href="{{ url('dashboard/penimbangananak') }}">
+            <i class="fas fa-weight"></i>
+            <span>Data Periksa Ibu Hamil</span></a>
     </li>
 </ul>

@@ -69,5 +69,23 @@ class DatabaseSeeder extends Seeder
             'catatan' => 'normal',
             'nama_anak' => 'Kaido'
         ]);
+
+        \App\Models\PeriksaIbuHamil::create([
+            'nik_ibu' => '10101010',
+            'berat_badan' => '60,5',
+            'umur_kehamilan' => '3,5',
+            'tindakan' => 'pemberian vitamin',
+            'catatan' => 'istirahat yang cukup',
+            'tanggal' => '2020-10-10'
+        ]);
+
+        \App\Models\PenimbanganAnak::create([
+            'kode_anak' => '1010',
+            'nama' => 'Kaido',
+            'berat_badan' => '6.5',
+            'tinggi_badan' => '56',
+            'catatan' => 'Sehat Wal afiat',
+            'tanggal' => '2020-10-10'
+        ]);
     }
 }

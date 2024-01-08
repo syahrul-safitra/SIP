@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PeriksaIbuHamil extends Model
+class PenimbanganAnak extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nik_ibu',
+        'kode_anak',
         'berat_badan',
-        'umur_kehamilan',
-        'tindakan',
+        'tinggi_badan',
         'catatan',
+        'nama',
         'tanggal'
     ];
-
-    public function ibu()
-    {
-        return $this->belongsTo(Ibu::class, 'nik_ibu', 'nik');
-    }
 }

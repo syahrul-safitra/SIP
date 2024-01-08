@@ -23,4 +23,9 @@ class Ibu extends Model
     {
         return $this->hasMany(Anak::class);
     }
+
+    public function periksaIbuHamil()
+    {
+        return $this->hasMany(PeriksaIbuHamil::class, 'nik_ibu', 'nik');
+    }
 }

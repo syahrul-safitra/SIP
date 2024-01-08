@@ -11,21 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('periksa_ibu_hamils', function (Blueprint $table) {
+        Schema::create('penimbangan_anaks', function (Blueprint $table) {
             $table->id();
-            $table->string('nik_ibu');
+            $table->string('kode_anak');
+            $table->string('nama');
             $table->string('berat_badan');
-            $table->string('umur_kehamilan');
-            $table->string('tindakan');
+            $table->string('tinggi_badan');
             $table->text('catatan');
             $table->date('tanggal');
 
-            $table->foreign('nik_ibu')
-                ->references('nik')
-                ->on('ibus')
+            $table->foreign('kode_anak')
+                ->references('kode')
+                ->on('anaks')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('periksa_ibu_hamils');
+        Schema::dropIfExists('penimbangan_anaks');
     }
 };

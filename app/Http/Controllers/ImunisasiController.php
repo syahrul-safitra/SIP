@@ -92,6 +92,11 @@ class ImunisasiController extends Controller
             'tanggal' => 'required'
         ]);
 
+        if ($request->kode_anak != $imunisasi->kode_anak) {
+            $getDataAnak = Anak::where('kode', $request->kode_anak)->first();
+            $validated['nama_anak'] = $getDataAnak->nama;
+        }
+
         Imunisasi::where('id', $imunisasi->id)
             ->update($validated);
 
