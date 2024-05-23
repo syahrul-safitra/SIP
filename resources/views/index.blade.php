@@ -106,7 +106,7 @@
     <!-- Facilities Start -->
 
     <!-- About Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -148,7 +148,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- About End -->
 
     <!-- Class Start -->
@@ -284,7 +284,7 @@
     <!-- Class End -->
 
     <!-- Registration Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 mb-5 mb-lg-0">
@@ -348,7 +348,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Registration End -->
 
     <!-- Team Start -->
@@ -361,9 +361,29 @@
                 <h1 class="mb-4">Meet Our Teachers</h1>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-3 text-center team mb-5">
+
+                @foreach ($anggotas as $anggota)
+                    <div class="col-md-6 col-lg-3 text-center team mb-5">
+                        <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
+                            <img class="img-fluid w-100" src="{{ asset('storage/' . $anggota->foto) }}" alt="" />
+                            <div
+                                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                                {{-- <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px"
+                                href="#"><i class="fab fa-twitter"></i></a> --}}
+                                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px"
+                                    href="{{ 'https://wa.me/' . $anggota->no_telpon }}"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                {{-- <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px"
+                                href="#"><i class="fab fa-linkedin-in"></i></a> --}}
+                            </div>
+                        </div>
+                        <h4>{{ $anggota->nama }}</h4>
+                        <i>{{ $anggota->alamat }}</i>
+                    </div>
+                @endforeach
+                {{-- <div class="col-md-6 col-lg-3 text-center team mb-5">
                     <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                        <img class="img-fluid w-100" src="img/team-1.jpg" alt="" />
+                        <img class="img-fluid w-100" src="img/team-2.jpg" alt="" />
                         <div
                             class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
                             <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px"
@@ -374,8 +394,8 @@
                                 href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
-                    <h4>Julia Smith</h4>
-                    <i>Music Teacher</i>
+                    <h4>Jhon Doe</h4>
+                    <i>Language Teacher</i>
                 </div>
                 <div class="col-md-6 col-lg-3 text-center team mb-5">
                     <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
@@ -424,14 +444,14 @@
                     </div>
                     <h4>Donald John</h4>
                     <i>Art Teacher</i>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
     <!-- Team End -->
 
     <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
         <div class="container p-0">
             <div class="text-center pb-2">
                 <p class="section-title px-5">
@@ -502,7 +522,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Testimonial End -->
 
     <!-- Blog Start -->
@@ -510,69 +530,69 @@
         <div class="container">
             <div class="text-center pb-2">
                 <p class="section-title px-5">
+                    <span class="px-2">Jadwal</span>
+                </p>
+                <h1 class="mb-4">Posyandu & Imunisasi</h1>
+
+
+                <div class="row pb-3">
+                    <div class="col-lg-12">
+                        <div class="card border-0 shadow-sm mb-2">
+                            <img class="card-img-top mb-2" style="height:400px"
+                                src="{{ 'storage/' . $beritaUtama[0]->foto }}" alt="" />
+                            <div class="card-body bg-light text-center p-4">
+                                <h4 class="">{{ $beritaUtama[0]->judul }}</h4>
+
+                                <p class="text-truncate" style="height: 100px">
+                                    @php
+                                        $potongKata = preg_replace("'<div>'", '', $beritaUtama[0]->deskripsi);
+                                        $potongKata = preg_replace("'</div>'", '', $potongKata);
+                                    @endphp
+
+                                    {!! $potongKata !!}
+                                </p>
+                                <a href="{{ url('bacaberita/' . $beritaUtama[0]->id) }}"
+                                    class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="text-center pb-2" id="berita">
+                <p class="section-title px-5">
                     <span class="px-2">Latest Blog</span>
                 </p>
                 <h1 class="mb-4">Latest Articles From Blog</h1>
             </div>
             <div class="row pb-3">
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow-sm mb-2">
-                        <img class="card-img-top mb-2" src="img/blog-1.jpg" alt="" />
-                        <div class="card-body bg-light text-center p-4">
-                            <h4 class="">Diam amet eos at no eos</h4>
-                            <div class="d-flex justify-content-center mb-3">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                @foreach ($beritas as $berita)
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm mb-2">
+                            <img class="card-img-top mb-2" style="height:200px" src="{{ 'storage/' . $berita->foto }}"
+                                alt="" />
+                            <div class="card-body bg-light text-center p-4">
+                                <h4 class="">{{ $berita->judul }}</h4>
+
+                                <p class="text-truncate" style="height: 100px">
+                                    @php
+                                        $potongKata = preg_replace("'<div>'", '', $berita->deskripsi);
+                                        $potongKata = preg_replace("'</div>'", '', $potongKata);
+                                    @endphp
+
+                                    {!! $potongKata !!}
+                                </p>
+                                <a href="{{ url('bacaberita/' . $berita->id) }}"
+                                    class="btn btn-primary px-4 mx-auto my-2">Read More</a>
                             </div>
-                            <p>
-                                Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                lorem. Tempor ipsum justo amet stet...
-                            </p>
-                            <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow-sm mb-2">
-                        <img class="card-img-top mb-2" src="img/blog-2.jpg" alt="" />
-                        <div class="card-body bg-light text-center p-4">
-                            <h4 class="">Diam amet eos at no eos</h4>
-                            <div class="d-flex justify-content-center mb-3">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                            </div>
-                            <p>
-                                Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                lorem. Tempor ipsum justo amet stet...
-                            </p>
-                            <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow-sm mb-2">
-                        <img class="card-img-top mb-2" src="img/blog-3.jpg" alt="" />
-                        <div class="card-body bg-light text-center p-4">
-                            <h4 class="">Diam amet eos at no eos</h4>
-                            <div class="d-flex justify-content-center mb-3">
-                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                            </div>
-                            <p>
-                                Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                                eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                                lorem. Tempor ipsum justo amet stet...
-                            </p>
-                            <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
+            {{ $beritas->links() }}
         </div>
     </div>
     <!-- Blog End -->

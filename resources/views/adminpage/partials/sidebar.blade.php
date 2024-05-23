@@ -31,6 +31,14 @@
 
         <a class="nav-link" href="{{ url('dashboard/penimbangananak') }}">
             <i class="fas fa-weight"></i>
-            <span>Data Periksa Ibu Hamil</span></a>
+            <span>Data Periksa Penimbangan Anak</span></a>
+
+        <a class="nav-link" href="{{ url('dashboard/anggota') }}">
+            <i class="fa fa-user"></i>
+            <span>Data Anggota</span></a>
+
+        <a class="nav-link" href="{{ url('dashboard/berita') }}">
+            <i class="fa fa-newspaper"></i>
+            <span>Data Berita</span></a>
     </li>
 </ul>

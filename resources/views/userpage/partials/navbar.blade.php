@@ -10,10 +10,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="class.html" class="nav-item nav-link">Classes</a>
-                    <a href="team.html" class="nav-item nav-link">Teachers</a>
+                    <a href="{{ url('/') }}"
+                        class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    <a href="#berita"
+                        class="nav-item nav-link {{ Request::is('bacaberita/*') ? 'active' : '' }}">Berita</a>
+                    <a href="{{ url('dashboard/cekimunisasi') }}"
+                        class="nav-item nav-link {{ Request::is('dashboard/cekimunisasi') ? 'active' : '' }}">Cek
+                        Imunisasi</a>
+                    <a href="{{ url('dashboard/cekanak') }}"
+                        class="nav-item nav-link {{ Request::is('dashboard/cekanak', 'dashboard/cekberatbadan/*') ? 'active' : '' }}">Data
+                        Anak</a>
                     <a href="gallery.html" class="nav-item nav-link">Gallery</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>

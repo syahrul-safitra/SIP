@@ -14,7 +14,7 @@ class ImunisasiController extends Controller
     public function index()
     {
         return view('adminpage.dashboardimunisasi.index', [
-            'imunisasis' => Imunisasi::all()
+            'imunisasis' => Imunisasi::latest()->paginate(5)
         ]);
     }
 
@@ -24,7 +24,20 @@ class ImunisasiController extends Controller
     public function create()
     {
 
-        $jenis_imunisasis = ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19'];
+        $jenis_imunisasis = [
+            'BC 6 POLI I',
+            'DPT 1 POLI II',
+            'DPT 2 POLI III',
+            'DPT 3 POLI VI',
+            'DPT 4',
+            'CMPK 1',
+            'CMPK 2',
+            'IPP',
+            'PCV 1',
+            'PCV 2',
+            'VIT A'
+        ];
+
 
         return view('adminpage.dashboardimunisasi.create', [
             'anaks' => Anak::all(),
@@ -70,7 +83,19 @@ class ImunisasiController extends Controller
     public function edit(Imunisasi $imunisasi)
     {
 
-        $jenis_imunisasis = ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19'];
+        $jenis_imunisasis = [
+            'BC 6 POLI I',
+            'DPT 1 POLI II',
+            'DPT 2 POLI III',
+            'DPT 3 POLI VI',
+            'DPT 4',
+            'CMPK 1',
+            'CMPK 2',
+            'IPP',
+            'PCV 1',
+            'PCV 2',
+            'VIT A'
+        ];
 
         return view('adminpage.dashboardimunisasi.edit', [
             'imunisasi' => $imunisasi,
@@ -111,5 +136,35 @@ class ImunisasiController extends Controller
         Imunisasi::destroy($imunisasi->id);
 
         return redirect('dashboard/imunisasi')->with('success', 'Data imunisasi berhasil dihapus!');
+    }
+
+    public function cekimunisasi()
+    {
+
+        $data = Imunisasi::whereYear('tanggal', date('Y'))->latest()->paginate(20);
+
+        if (request('search')) {
+            $data = Imunisasi::whereYear('tanggal', date('Y'))
+                ->where('nama_anak', 'like', '%' . request('search') . '%')
+                ->orWhere('jenis_imunisasi', 'like', '%' . request('search') . '%')
+                ->orWhere('tanggal', 'like', '%' . request('search') . '%')
+                ->paginate(20);
+        }
+
+        return view('adminpage.dashboardimunisasi.cekimunisasi', [
+            'imunisasis' => $data
+        ]);
+    }
+
+    public function cetak(Request $request)
+    {
+
+        $data = Imunisasi::with('anak')->whereBetween('tanggal', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+
+        return view('adminpage.dashboardimunisasi.cetak', [
+            'dataImunisasis' => $data,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir
+        ]);
     }
 }

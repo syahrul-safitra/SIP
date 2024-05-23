@@ -13,8 +13,9 @@ class PeriksaIbuHamilController extends Controller
      */
     public function index()
     {
+
         return view('adminpage.dashboardperiksaibuhamil.index', [
-            'periksa_ibu' => PeriksaIbuHamil::all()
+            'periksa_ibu' => PeriksaIbuHamil::latest()->paginate(5)
         ]);
     }
 
@@ -63,6 +64,7 @@ class PeriksaIbuHamilController extends Controller
      */
     public function edit(PeriksaIbuHamil $periksaibuhamil)
     {
+
         return view('adminpage.dashboardperiksaibuhamil.edit', [
             'ibus' => Ibu::all(),
             'periksa' => $periksaibuhamil
@@ -97,5 +99,16 @@ class PeriksaIbuHamilController extends Controller
         PeriksaIbuHamil::destroy($periksaibuhamil->id);
 
         return redirect('dashboard/periksaibuhamil')->with('success', 'Data periksa ibu hamil berhasil dihapus!');
+    }
+
+    public function cetak(Request $request)
+    {
+        $data = PeriksaIbuHamil::with('ibu')->whereBetween('tanggal', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+
+        return view('adminpage.dashboardperiksaibuhamil.cetak', [
+            'dataPeriksaIbu' => $data,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir
+        ]);
     }
 }

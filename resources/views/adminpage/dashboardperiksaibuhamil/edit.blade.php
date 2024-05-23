@@ -55,7 +55,7 @@
 
                             <div class="form-group">
                                 <label for="berat_badan">Berat Badan</label>
-                                <input type="number" class="form-control @error('berat_badan') is-invalid @enderror"
+                                <input type="text" class="form-control @error('berat_badan') is-invalid @enderror"
                                     name="berat_badan" value="{{ old('berat_badan', $periksa->berat_badan) }}"
                                     id="berat_badan" placeholder="Masukan Berat Badan (kg)" step="any">
                                 @error('berat_badan')
@@ -67,7 +67,7 @@
 
                             <div class="form-group">
                                 <label for="umur_kehamilan">Umur Kehamilan</label>
-                                <input type="number" class="form-control @error('umur_kehamilan') is-invalid @enderror"
+                                <input type="text" class="form-control @error('umur_kehamilan') is-invalid @enderror"
                                     name="umur_kehamilan" value="{{ old('umur_kehamilan', $periksa->umur_kehamilan) }}"
                                     id="umur_kehamilan" placeholder="Masukan Umur Kehamilan" step="any">
                                 @error('umur_kehamilan')

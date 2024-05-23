@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Anak;
 use App\Models\Ibu;
+use App\Models\PenimbanganAnak;
+
 use Illuminate\Http\Request;
 
 class AnakController extends Controller
@@ -14,7 +16,7 @@ class AnakController extends Controller
     public function index()
     {
         return view('adminpage.dashboardanak.index', [
-            'anaks' => Anak::with('ibu')->get()
+            'anaks' => Anak::with('ibu')->latest()->paginate(5)
         ]);
     }
 
@@ -109,6 +111,11 @@ class AnakController extends Controller
 
         $validated = $request->validate($rules);
 
+        if ($request->ibu_id != $anak->ibu_id) {
+            $getDataIbu = Ibu::where('id', $request->ibu_id)->first();
+            $validated['nama_ibu'] = $getDataIbu->nama;
+        }
+
         Anak::where('id', $anak->id)
             ->update($validated);
 
@@ -123,5 +130,50 @@ class AnakController extends Controller
         Anak::destroy($anak->id);
 
         return redirect('dashboard/anak')->with('success', 'Data anak berhasil dihapus!');
+    }
+
+    public function cekanak()
+    {
+
+        return view('userpage.dataanak', [
+            'anaks' => Anak::latest()->get()
+        ]);
+    }
+
+    public function cekberat(Anak $data)
+    {
+
+        $tahunSekarang = date('Y');
+
+        for ($i = 1; $i <= 12; $i++) {
+            $getData = PenimbanganAnak::select('berat_badan', 'tinggi_badan')->where('kode_anak', $data->kode)
+                ->whereMonth('tanggal', $i)->whereYear('tanggal', $tahunSekarang)
+                ->first();
+
+            if ($getData == null) {
+                $dataBerat[] = 0;
+                $dataTinggi[] = 0;
+            } else {
+                $dataBerat[] = $getData['berat_badan'];
+                $dataTinggi[] = $getData['tinggi_badan'];
+            }
+        }
+
+        return view('userpage.grafik', [
+            'dataBerat' => $dataBerat,
+            'dataTinggi' => $dataTinggi,
+            'label' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+        ]);
+    }
+
+    public function cetak(Request $request)
+    {
+        $data = Anak::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+
+        return view('adminpage.dashboardanak.cetak', [
+            'dataAnaks' => $data,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir
+        ]);
     }
 }

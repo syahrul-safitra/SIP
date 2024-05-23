@@ -22,20 +22,64 @@
             <div class="card-header d-flex justify-content-between py-3 d-flex">
                 <div>
                     <a href="{{ url('dashboard/imunisasi/create') }}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-success">Cetak</a>
-                </div>
 
-                <div>
-                    <input type="text" class="form-control" placeholder="Cari..." aria-label="Username"
-                        aria-describedby="basic-addon1">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        Cetak
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="{{ url('cetakdataimunisasi') }}" method="POST">
+                                @csrf
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cetak Data Imunisasi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex justify-content-center">
+                                            <input type="date"
+                                                class="form-control @error('tanggal_awal') is-invalid @enderror"
+                                                name="tanggal_awal" value="{{ old('tanggal_awal') }}" id="tanggal_awal">
+                                            @error('tanggal_awal')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <input type="date"
+                                                class="form-control @error('tanggal_akhir') is-invalid @enderror"
+                                                name="tanggal_akhir" value="{{ old('tanggal_akhir') }}" id="tanggal_akhir">
+                                            @error('tanggal_awal')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Cetak</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <table class="table align-items-center table-flush table-hover mb-3" id="dataTableHover">
                     <thead class="thead-light">
                         <tr>
+                            <th style="width: 5%">No</th>
                             <th style="width: 20%">Nama</th>
-                            <th style="width: 10%">Kode</th>
+                            <th style="width: 5%">Kode</th>
                             <th style="width: 20%">Tanggal</th>
                             <th style="width: 20%">Jenis Imunisasi</th>
                             <th style="width: 20%">Catatan</th>
@@ -46,6 +90,7 @@
                     <tbody>
                         @foreach ($imunisasis as $imunisasi)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $imunisasi->nama_anak }}</td>
                                 <td>{{ $imunisasi->kode_anak }}</td>
                                 <td>{{ $imunisasi->tanggal }}</td>
@@ -78,6 +123,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                {{ $imunisasis->links() }}
             </div>
         </div>
     </div>

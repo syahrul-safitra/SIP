@@ -27,4 +27,9 @@ class Anak extends Model
     {
         return $this->belongsTo(Ibu::class);
     }
+
+    public function penimbangan()
+    {
+        return $this->hasMany(PenimbanganAnak::class, 'kode_anak', 'kode');
+    }
 }

@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('imunisasis', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis_imunisasi', ['Hepatitis B', 'Polio', 'BCG', 'DPT', 'Hib', 'Campak', 'MMR', 'PCV', 'Rotavirus', 'Influenza', 'Tipes', 'Hepatitis A', 'Varisela', 'HPV', 'Japanese encephalitis', 'Dengue', 'COVID-19']);
+            $table->enum('jenis_imunisasi', [
+                'BC 6 POLI I',
+                'DPT 1 POLI II',
+                'DPT 2 POLI III',
+                'DPT 3 POLI VI',
+                'DPT 4',
+                'CMPK 1',
+                'CMPK 2',
+                'IPP',
+                'PCV 1',
+                'PCV 2',
+                'VIT A'
+            ]);
             $table->string('kode_anak');
             $table->text('catatan')->nullable();
             $table->string('nama_anak');

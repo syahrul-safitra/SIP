@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Imunisasi::create([
-            'jenis_imunisasi' => 'Hepatitis B',
+            'jenis_imunisasi' => 'BC 6 POLI I',
             'kode_anak' => '1010',
             'tanggal' => '2020-10-10',
             'catatan' => 'normal',

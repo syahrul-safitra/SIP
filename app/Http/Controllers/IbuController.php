@@ -13,7 +13,7 @@ class IbuController extends Controller
     public function index()
     {
         return view('adminpage.dashboardibu.index', [
-            'ibus' => Ibu::all()
+            'ibus' => Ibu::latest()->paginate(5)
         ]);
     }
 
@@ -100,5 +100,14 @@ class IbuController extends Controller
         Ibu::destroy($ibu->id);
 
         return redirect('dashboard/ibu')->with('success', 'Data ibu berhasil dihapus!');
+    }
+
+    public function cetak(Request $request)
+    {
+        return view('adminpage.dashboardibu.cetak', [
+            'dataIbus' => Ibu::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get(),
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir
+        ]);
     }
 }

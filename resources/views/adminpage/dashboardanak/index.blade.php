@@ -5,7 +5,7 @@
         <div class="card mb-4">
 
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Data Ibu</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Data Anak</h6>
             </div>
 
             @if (session()->has('success'))
@@ -22,18 +22,61 @@
             <div class="card-header d-flex justify-content-between py-3 d-flex">
                 <div>
                     <a href="{{ url('dashboard/anak/create') }}" class="btn btn-primary">Tambah</a>
-                    <a href="" class="btn btn-success">Cetak</a>
-                </div>
 
-                <div>
-                    <input type="text" class="form-control" placeholder="Cari..." aria-label="Username"
-                        aria-describedby="basic-addon1">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        Cetak
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="{{ url('cetakdataanak') }}" method="POST">
+                                @csrf
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cetak Data Anak</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex justify-content-center">
+                                            <input type="date"
+                                                class="form-control @error('tanggal_awal') is-invalid @enderror"
+                                                name="tanggal_awal" value="{{ old('tanggal_awal') }}" id="tanggal_awal">
+                                            @error('tanggal_awal')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <input type="date"
+                                                class="form-control @error('tanggal_akhir') is-invalid @enderror"
+                                                name="tanggal_akhir" value="{{ old('tanggal_akhir') }}" id="tanggal_akhir">
+                                            @error('tanggal_awal')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Cetak</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <table class="table align-items-center table-flush table-hover mb-3" id="dataTableHover">
                     <thead class="thead-light">
                         <tr>
+                            <th>No</th>
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Nama Ibu</th>
@@ -51,6 +94,7 @@
                     <tbody>
                         @foreach ($anaks as $anak)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $anak->kode }}</td>
                                 <td>{{ $anak->nama }}</td>
                                 <td>{{ $anak->nama_ibu }}</td>
@@ -84,7 +128,7 @@
                     </tbody>
                 </table>
 
-
+                {{ $anaks->links() }}
             </div>
         </div>
     </div>
