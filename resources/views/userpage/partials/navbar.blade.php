@@ -30,7 +30,15 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="/login" class="btn btn-primary px-4">Login</a>
+
+                <a href="">Login</a>
+
+                @if (Auth::check())
+                    <a href="/dashboardAdmin" class="btn btn-primary px-4">Dashboard</a>
+                @else
+                    <a href="/login" class="btn btn-primary px-4">Login</a>
+                @endif
+
             </div>
         </nav>
     </div>

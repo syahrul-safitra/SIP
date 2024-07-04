@@ -41,7 +41,7 @@
                                 <td>{{ $berita->judul }}</td>
                                 <td>{{ $berita->tanggal }}</td>
                                 <td>
-                                    <a href="{{ asset('storage/' . $berita->foto) }}" class="btn btn-info"
+                                    <a href="{{ asset('file/' . $berita->foto) }}" class="btn btn-info"
                                         style="padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px;
                                    margin-right: 5px"><i
                                             class="fas fa-image"></i></a>

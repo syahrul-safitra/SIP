@@ -30,6 +30,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    // $data = Berita::all();
+
+    // if (empty($data)) {
+    //     return 'ada';
+    // } else {
+    //     return 'tidak ada';
+    // }
     return view('index', [
         'anggotas' => Anggota::all(),
         'beritaUtama' => Berita::all(),

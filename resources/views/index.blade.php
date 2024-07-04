@@ -528,37 +528,40 @@
     <!-- Blog Start -->
     <div class="container-fluid pt-5">
         <div class="container">
-            <div class="text-center pb-2">
-                <p class="section-title px-5">
-                    <span class="px-2">Jadwal</span>
-                </p>
-                <h1 class="mb-4">Posyandu & Imunisasi</h1>
+
+            @if (empty($beritaUtama))
+                <div class="text-center pb-2">
+                    <p class="section-title px-5">
+                        <span class="px-2">Jadwal</span>
+                    </p>
+                    <h1 class="mb-4">Posyandu & Imunisasi</h1>
 
 
-                <div class="row pb-3">
-                    <div class="col-lg-12">
-                        <div class="card border-0 shadow-sm mb-2">
-                            <img class="card-img-top mb-2" style="height:400px"
-                                src="{{ 'storage/' . $beritaUtama[0]->foto }}" alt="" />
-                            <div class="card-body bg-light text-center p-4">
-                                <h4 class="">{{ $beritaUtama[0]->judul }}</h4>
+                    <div class="row pb-3">
+                        <div class="col-lg-12">
+                            <div class="card border-0 shadow-sm mb-2">
+                                <img class="card-img-top mb-2" style="height:400px"
+                                    src="{{ 'storage/' . $beritaUtama[0]->foto }}" alt="" />
+                                <div class="card-body bg-light text-center p-4">
+                                    <h4 class="">{{ $beritaUtama[0]->judul }}</h4>
 
-                                <p class="text-truncate" style="height: 100px">
-                                    @php
-                                        $potongKata = preg_replace("'<div>'", '', $beritaUtama[0]->deskripsi);
-                                        $potongKata = preg_replace("'</div>'", '', $potongKata);
-                                    @endphp
+                                    <p class="text-truncate" style="height: 100px">
+                                        @php
+                                            $potongKata = preg_replace("'<div>'", '', $beritaUtama[0]->deskripsi);
+                                            $potongKata = preg_replace("'</div>'", '', $potongKata);
+                                        @endphp
 
-                                    {!! $potongKata !!}
-                                </p>
-                                <a href="{{ url('bacaberita/' . $beritaUtama[0]->id) }}"
-                                    class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                                        {!! $potongKata !!}
+                                    </p>
+                                    <a href="{{ url('bacaberita/' . $beritaUtama[0]->id) }}"
+                                        class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
+            @endif
 
 
             <div class="text-center pb-2" id="berita">
@@ -571,7 +574,7 @@
                 @foreach ($beritas as $berita)
                     <div class="col-lg-4">
                         <div class="card border-0 shadow-sm mb-2">
-                            <img class="card-img-top mb-2" style="height:200px" src="{{ 'storage/' . $berita->foto }}"
+                            <img class="card-img-top mb-2" style="height:200px" src="{{ 'file/' . $berita->foto }}"
                                 alt="" />
                             <div class="card-body bg-light text-center p-4">
                                 <h4 class="">{{ $berita->judul }}</h4>

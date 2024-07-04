@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
@@ -31,6 +31,7 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'judul' => 'required|unique:beritas',
             'foto' => 'required|image|max:5000',
@@ -38,7 +39,18 @@ class BeritaController extends Controller
             'tanggal' => 'required'
         ]);
 
-        $validated['foto'] = $request->file('foto')->store('foto');
+        // $validated['foto'] = $request->file('foto')->store('foto');
+        // get file : 
+        $file = $request->file('foto');
+
+        $renameNamaFile = uniqid() . '_' . $file->getClientOriginalName();
+
+        $validated['foto'] = $renameNamaFile;
+
+        $tujuan_upload = 'file';
+
+        $file->move($tujuan_upload, $renameNamaFile);
+
 
         Berita::create($validated);
 
@@ -85,10 +97,23 @@ class BeritaController extends Controller
         if ($request->file('foto')) {
 
             // hapus foto lama 
-            Storage::delete($beritum->foto);
+            // Storage::delete($beritum->foto);
 
             // store foto baru dan datanya disimpan dalam validated[foto]:
-            $validated['foto'] = $request->file('foto')->store('foto');
+            // $validated['foto'] = $request->file('foto')->store('foto');
+
+            // get file : 
+            $file = $request->file('foto');
+
+            $renameNamaFile = uniqid() . '_' . $file->getClientOriginalName();
+
+            $validated['foto'] = $renameNamaFile;
+
+            $tujuan_upload = 'file';
+
+            $file->move($tujuan_upload, $renameNamaFile);
+
+            File::delete('file/' . $beritum->file);
         }
 
         Berita::where('id', $beritum->id)->update($validated);
@@ -102,7 +127,11 @@ class BeritaController extends Controller
     public function destroy(Berita $beritum)
     {
         // hapus foto : 
-        Storage::delete($beritum->foto);
+        // Storage::delete($beritum->foto);
+
+        // hapus data file terlebih dahulu : 
+        File::delete('file/' . $beritum->file);
+
 
         // hapus berita : 
         Berita::destroy($beritum->id);

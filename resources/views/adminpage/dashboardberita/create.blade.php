@@ -64,7 +64,6 @@
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
                                     <label>Aksi</label>
                                     <div>
